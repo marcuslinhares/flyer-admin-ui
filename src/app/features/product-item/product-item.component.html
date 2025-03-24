@@ -1,0 +1,16 @@
+<p-card class="product-card">
+  <ng-template pTemplate="header">
+    <div class="product-image">
+      <img [src]="productImageUrl" alt="{{ product.nome }}" />
+    </div>
+  </ng-template>
+
+  <ng-template pTemplate="content">
+    <h2 class="product-title">{{ product.nome }}</h2>
+  </ng-template>
+
+  <ng-template pTemplate="footer">
+    <div class="product-price">{{ product.preco | currency }}</div>
+    <p-button label="Ver Detalhes" icon="pi pi-info-circle" class="detail-button" (click)="viewDetails()"></p-button>
+  </ng-template>
+</p-card>

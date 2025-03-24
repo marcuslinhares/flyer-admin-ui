@@ -1,0 +1,22 @@
+<div class="login-container">
+  <h2>Login</h2>
+  <form [formGroup]="loginForm" (ngSubmit)="onLogin()">
+    <div class="p-field">
+      <label for="email">Email</label>
+      <input id="email" type="text" pInputText formControlName="email" />
+      <div *ngIf="email?.invalid && email?.touched" class="error">Email inválido</div>
+    </div>
+
+    <div class="p-field">
+      <label for="password">Senha</label>
+      <input id="password" type="password" pInputText formControlName="password" />
+      <div *ngIf="password?.invalid && password?.touched" class="error">Senha inválida</div>
+    </div>
+
+    <div class="p-field">
+      <button pButton type="submit" label="Login" [disabled]="isLoading || loginForm.invalid"></button>
+    </div>
+  </form>
+
+  <p-toast></p-toast>
+</div>

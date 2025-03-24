@@ -16,14 +16,13 @@ export class AuthService {
     return this.http.post<{ token: string }>(this.apiUrl, { identity: email, password }).pipe(
       catchError((err) => {
         console.error('Erro de login:', err);
-        throw err; // Repassa o erro para o componente
+        throw err;
       })
     );
   }
 
-  // Armazenando o token com expiração em sessionStorage
   storeToken(token: string) {
-    const expirationTime = this.jwtHelper.getTokenExpirationDate(token)?.getTime() || Date.now() + 3600000; // Expira em 1 hora
+    const expirationTime = this.jwtHelper.getTokenExpirationDate(token)?.getTime() || Date.now() + 3600000;
     sessionStorage.setItem('token', token);
     sessionStorage.setItem('tokenExpiration', expirationTime.toString());
   }

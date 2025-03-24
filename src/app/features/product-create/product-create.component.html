@@ -1,0 +1,67 @@
+<p-toast></p-toast>
+
+<!-- Card para o formulário -->
+<div class="product-form-container">
+  <p-card header="Cadastro de Produto">
+    <form [formGroup]="productForm" (ngSubmit)="createProduct()" class="p-fluid">
+      <!-- Nome -->
+      <div class="p-field">
+        <label for="name">Nome:</label>
+        <input id="name" pInputText formControlName="nome" required />
+        <p-message severity="error" *ngIf="productForm.get('nome')?.invalid && productForm.get('nome')?.touched">
+          Nome é obrigatório e deve ter pelo menos 3 caracteres.
+        </p-message>
+      </div>
+
+      <!-- Descrição -->
+      <div class="p-field">
+        <label for="description">Descrição:</label>
+        <textarea id="description" pInputTextarea formControlName="descricao"></textarea>
+        <p-message severity="error" *ngIf="productForm.get('descricao')?.invalid && productForm.get('descricao')?.touched">
+          Descrição deve ter pelo menos 10 caracteres.
+        </p-message>
+      </div>
+
+      <div class="p-field">
+        <label for="price">Preço:</label>
+        <p-inputNumber 
+          id="price" 
+          formControlName="preco" 
+          mode="currency" 
+          currency="BRL" 
+          locale="pt-BR" 
+          required 
+          [min]="0" 
+          [useGrouping]="true">
+        </p-inputNumber>
+        <p-message severity="error" *ngIf="productForm.get('preco')?.invalid && productForm.get('preco')?.touched">
+          Preço deve ser maior que 0.
+        </p-message>
+      </div>
+
+      <!-- Input de Imagem -->
+      <p-fileUpload 
+        name="image" 
+        (onSelect)="onFileSelected($event)" 
+        accept="image/*" 
+        auto 
+        chooseLabel="Escolher Imagem">
+      </p-fileUpload>
+
+      <!-- Exibir erro de validação -->
+      <div *ngIf="imageError" class="error-message">
+        <small>{{ imageError }}</small>
+      </div>
+
+      <!-- Exibir pré-visualização da imagem -->
+      <div *ngIf="previewImage" class="image-preview">
+        <img [src]="previewImage" alt="Pré-visualização da Imagem" width="100" />
+      </div>
+
+      <!-- Botão -->
+      <div class="p-field">
+        <button pButton type="submit" [disabled]="productForm.invalid" label="Criar Produto" icon="pi pi-check" class="p-button-success"></button>
+      </div>
+    </form>
+  </p-card>
+</div>
