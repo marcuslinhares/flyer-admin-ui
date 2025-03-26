@@ -1,4 +1,4 @@
-name: Deploy Frontend
+name: Deploy flyer-admin-ui
 
 on:
   push:
